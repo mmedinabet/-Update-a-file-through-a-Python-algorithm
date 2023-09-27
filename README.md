@@ -1,13 +1,12 @@
 <h1> Update a file through a Python algorithm</h1> 
 <h2>Description:</h2>
-You are a security professional working at a health care company. As part of your job, you're required to regularly update a file that identifies the employees who can access restricted content. The contents of the file are based on who is working with personal patient records. Employees are restricted access based on their IP address. There is an allow list for IP addresses permitted to sign into the restricted subnetwork. There's also a remove list that identifies which employees you must remove from this allow list.
-
-Your task is to create an algorithm that uses Python code to check whether the allow list contains any IP addresses identified on the remove list. If so, you should remove those IP addresses from the file containing the allow list.
+In my organization, access to restricted content is managed through an "allow_list.txt" file containing approved IP addresses. To automate the removal of IP addresses that should no longer have access, I developed an algorithm that updates the "allow_list.txt" file based on a separate list of IP addresses to be removed.
 
 <h2>Open the file that contains the allow list</h2>
-For the first part of the algorithm, I opened the "allow_list.txt" file. First, I assigned this file name as a string to the import_file variable:
+For the first part of the algorithm, I opened the "allow_list.txt" file. First, I assigned this file name as a string to the import_file and removed_list variables:
 
 ![Screenshot 2023-09-26 3 30 20 PM](https://github.com/mmedinabet/-Update-a-file-through-a-Python-algorithm/assets/142737434/d9dc0728-de9f-4405-8a1b-43550e938efc)
+
 
 The 'with' statement to open the file:
 
@@ -38,13 +37,27 @@ The 'for loop' in Python repeats code for a specified sequence. The overall purp
 
 <h2>Remove IP addresses that are on the remove list</h2>
 
+My algorithm requires removing any IP address from the allow list, ip_addresses, that is also contained in remove_list. First, for loop is required to create a conditional that evaluated whether or not the loop variable element was found in the ip_addresses list. 
+
+
 ![Screenshot 2023-09-26 3 48 27 PM](https://github.com/mmedinabet/-Update-a-file-through-a-Python-algorithm/assets/142737434/7485b4fc-6ca5-4f79-917e-9bc447eab8d1)
 
+Then, within that conditional, I applied .remove() to ip_addresses. I passed in the loop variable element as the argument so that each IP address that was in the remove_list would be removed from ip_addresses as well. 
+
 <h2>Update the file with the revised list of IP addresses</h2>
+  
+In order to finalize my algorithm, I needed to update the allow list file with the revised list of IP addresses. I used the 'join()' methond since I needed to convert the list back into a string. 
 
 ![Screenshot 2023-09-26 3 54 52 PM](https://github.com/mmedinabet/-Update-a-file-through-a-Python-algorithm/assets/142737434/05da8007-bfb4-4777-a261-f709561b8f79)
 
+I used the .join() method to create a string from the list ip_addresses so that I could pass it in as an argument to the .write() method when writing to the file "allow_list.txt". I used the string ("\n") as the separator to instruct Python to place each element on a new line. 
+
+Then, I used another with statement and the '.write()' method to update the file:
+
 ![Screenshot 2023-09-26 3 56 43 PM](https://github.com/mmedinabet/-Update-a-file-through-a-Python-algorithm/assets/142737434/c2ad0c24-d24a-440a-9982-60db37284ff2)
 
+This time, I used a second argument of "w" with the open() function in my with statement. This line of code indicates that I want to open a file to write over its contents. 
 
 <h2>Summary</h2>
+
+I created an algorithm to update the "allow_list.txt" file, which contains approved IP addresses. This algorithm involves reading the file, converting its contents into a list, and then iterating through a "remove_list" to remove any matching IP addresses. After removing them, the algorithm converts the updated list back into a string and overwrites the "allow_list.txt" file with the revised IP address list.
